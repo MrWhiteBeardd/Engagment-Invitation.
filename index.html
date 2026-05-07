@@ -9,12 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --primary-gold: #d4af37;
             --secondary-gold: #f4e5b3;
@@ -22,6 +16,12 @@
             --cream: #fef9f3;
             --deep-red: #8b1a1a;
             --text-dark: #2c1810;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -50,6 +50,8 @@
             opacity: 0.6;
             animation: float-up 15s infinite ease-in-out;
             font-size: 20px;
+            will-change: transform;
+            transition: transform 0.3s;
         }
 
         @keyframes float-up {
@@ -80,6 +82,12 @@
             padding: 2rem;
             position: relative;
             z-index: 2;
+            background: linear-gradient(120deg, #fff5eb 60%, #f4e5b3 100%);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08);
+            border-radius: 30px;
+            margin: 2rem auto;
+            max-width: 900px;
+            overflow: hidden;
         }
 
         .ornament-top, .ornament-bottom {
@@ -95,7 +103,6 @@
             text-transform: uppercase;
             color: var(--primary-gold);
             margin-bottom: 1rem;
-            animation: fadeInDown 1.5s ease-out;
         }
 
         .names {
@@ -107,7 +114,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmer 3s linear infinite, fadeInUp 1.5s ease-out;
+            animation: shimmer 3s linear infinite;
             margin: 1rem 0;
         }
 
@@ -144,7 +151,6 @@
             font-style: italic;
             color: var(--text-dark);
             margin: 1.5rem 0;
-            animation: fadeInUp 2s ease-out;
         }
 
         .date-frame {
@@ -154,7 +160,6 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
-            animation: zoomIn 1.5s ease-out;
         }
 
         .date-label {
@@ -176,7 +181,6 @@
         /* Countdown Timer */
         .countdown-container {
             margin: 3rem 0;
-            animation: fadeInUp 2.5s ease-out;
         }
 
         .countdown-title {
@@ -218,6 +222,12 @@
             font-weight: 700;
             color: var(--deep-red);
             line-height: 1;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), color 0.3s;
+        }
+        .countdown-number.flip {
+            transform: rotateX(360deg) scale(1.2);
+            color: var(--primary-gold);
         }
 
         .countdown-label {
@@ -226,6 +236,17 @@
             letter-spacing: 2px;
             color: var(--primary-gold);
             margin-top: 0.5rem;
+        }
+
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.68,-0.55,.27,1.55), transform 0.8s;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         /* Message Section */
@@ -237,7 +258,6 @@
             border-radius: 20px;
             border: 2px solid var(--secondary-gold);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            animation: fadeInUp 3s ease-out;
         }
 
         .message-text {
@@ -306,61 +326,6 @@
             font-weight: 700;
         }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .floral-left, .floral-right {
-                display: none;
-            }
-
-            .countdown {
-                gap: 1rem;
-            }
-
-            .countdown-item {
-                min-width: 70px;
-                padding: 1rem 1.5rem;
-            }
-
-            .message-section {
-                margin: 2rem;
-                padding: 2rem;
-            }
-        }
-
         /* Loading Animation */
         .loader {
             position: fixed;
@@ -396,6 +361,27 @@
             }
             20%, 40% {
                 transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .floral-left, .floral-right {
+                display: none;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 1rem 1.5rem;
+            }
+
+            .message-section {
+                margin: 2rem;
+                padding: 2rem;
             }
         }
     </style>
@@ -484,57 +470,75 @@
 
     <script>
         // Set your engagement date here (YYYY-MM-DDTHH:MM:SS)
-        const engagementDate = new Date('2025-12-20T18:00:00').getTime();
+        const engagementDate = new Date('2026-05-30T18:00:00').getTime();
 
         // Update the date display
         const eventDateElement = document.getElementById('eventDate');
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         eventDateElement.textContent = new Date(engagementDate).toLocaleDateString('en-US', options);
 
-        // Countdown Timer Function
+        // Countdown Timer Function with flip animation
+        function animateNumber(id, newValue) {
+            const el = document.getElementById(id);
+            if (el.textContent !== newValue) {
+                el.classList.add('flip');
+                setTimeout(() => el.classList.remove('flip'), 300);
+            }
+            el.textContent = newValue;
+        }
+
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = engagementDate - now;
 
             if (distance < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
+                animateNumber('days', '00');
+                animateNumber('hours', '00');
+                animateNumber('minutes', '00');
+                animateNumber('seconds', '00');
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            animateNumber('days', days);
+            animateNumber('hours', hours);
+            animateNumber('minutes', minutes);
+            animateNumber('seconds', seconds);
         }
 
         // Update countdown every second
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Create Floating Hearts
+        // Create Floating Hearts with parallax
         function createHearts() {
             const container = document.getElementById('heartsContainer');
             const heartSymbols = ['❤', '💕', '💖', '💗', '💓'];
-
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 40; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
                 heart.style.left = Math.random() * 100 + '%';
                 heart.style.animationDelay = Math.random() * 15 + 's';
                 heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+                heart.dataset.speed = 0.5 + Math.random();
                 container.appendChild(heart);
             }
         }
+
+        // Parallax effect for hearts
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.heart').forEach(heart => {
+                const speed = heart.dataset.speed;
+                heart.style.transform = `translateY(${scrollY * speed * 0.2}px)`;
+            });
+        });
 
         // Remove Loader when page loads
         window.addEventListener('load', () => {
@@ -542,30 +546,25 @@
                 document.getElementById('loader').classList.add('hidden');
             }, 1000);
             createHearts();
+
+            // Add scroll-reveal class to hero elements
+            document.querySelectorAll(
+                '.countdown-item, .message-section, .date-frame, .names, .ampersand, .engagement-title'
+            ).forEach(el => el.classList.add('scroll-reveal'));
+
+            revealOnScroll();
         });
 
-        // Smooth scroll animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Scroll reveal logic
+        function revealOnScroll() {
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    el.classList.add('visible');
                 }
             });
-        }, observerOptions);
-
-        // Observe elements for scroll animation
-        document.querySelectorAll('.countdown-item, .message-section').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        }
+        window.addEventListener('scroll', revealOnScroll);
     </script>
 </body>
 </html>
