@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karim & Kholoud - Engagement Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #d4af37;
+            --secondary-gold: #f4e5b3;
+            --rose-gold: #e8b4b8;
+            --cream: #fef9f3;
+            --deep-red: #8b1a1a;
+            --text-dark: #2c1810;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #fef9f3 0%, #fff5eb 50%, #fef9f3 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--rose-gold);
+            opacity: 0.6;
+            animation: float-up 15s infinite ease-in-out;
+            font-size: 20px;
+        }
+
+        @keyframes float-up {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ornament-top, .ornament-bottom {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin: 1rem 0;
+        }
+
+        .invitation-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .names {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-gold), var(--deep-red), var(--primary-gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite, fadeInUp 1.5s ease-out;
+            margin: 1rem 0;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .ampersand {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--primary-gold);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .engagement-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-style: italic;
+            color: var(--text-dark);
+            margin: 1.5rem 0;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .date-frame {
+            border: 3px double var(--primary-gold);
+            padding: 2rem 3rem;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+            animation: zoomIn 1.5s ease-out;
+        }
+
+        .date-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .event-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--deep-red);
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            margin: 3rem 0;
+            animation: fadeInUp 2.5s ease-out;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(254, 249, 243, 0.9));
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+            min-width: 100px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--deep-red);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-gold);
+            margin-top: 0.5rem;
+        }
+
+        /* Message Section */
+        .message-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            border: 2px solid var(--secondary-gold);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 3s ease-out;
+        }
+
+        .message-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .message-highlight {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--deep-red);
+            display: block;
+            margin: 1.5rem 0;
+        }
+
+        /* Floral Decorations */
+        .floral-left, .floral-right {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8rem;
+            opacity: 0.1;
+            color: var(--primary-gold);
+            z-index: 0;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .floral-left {
+            left: 2rem;
+        }
+
+        .floral-right {
+            right: 2rem;
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: translateY(-50%) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-50%) rotate(5deg);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .footer-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .floral-left, .floral-right {
+                display: none;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 1rem 1.5rem;
+            }
+
+            .message-section {
+                margin: 2rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-heart {
+            font-size: 4rem;
+            color: var(--deep-red);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(1.1);
+            }
+            20%, 40% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-heart">
+            <i class="fas fa-heart"></i>
+        </div>
+    </div>
+
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Floral Decorations -->
+    <div class="floral-left">
+        <i class="fas fa-spa"></i>
+    </div>
+    <div class="floral-right">
+        <i class="fas fa-spa"></i>
+    </div>
+
+    <!-- Main Content -->
+    <section class="hero">
+        <div class="ornament-top">
+            <i class="fas fa-gem"></i>
+        </div>
+
+        <p class="invitation-text">You Are Cordially Invited To The Engagement Of</p>
+
+        <h1 class="names">Karim</h1>
+        <div class="ampersand">&</div>
+        <h1 class="names">Kholoud</h1>
+
+        <h2 class="engagement-title">Together With Their Families</h2>
+
+        <div class="date-frame">
+            <p class="date-label">Save The Date</p>
+            <p class="event-date" id="eventDate">December 20, 2025</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <h3 class="countdown-title">Countdown To Our Special Day</h3>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Section -->
+    <section class="message-section">
+        <p class="message-text">
+            <span class="message-highlight">Two hearts, one love</span>
+            We joyfully invite you to celebrate our engagement as we begin this beautiful journey together. Your presence would make our special day even more memorable.
+            <br><br>
+            With love and anticipation,<br>
+            <span class="message-highlight" style="font-size: 2.2rem;">Karim & Kholoud</span>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">We Can't Wait To Celebrate With You!</p>
+        <p class="footer-names">Karim & Kholoud</p>
+        <div style="margin-top: 1rem; font-size: 1.5rem;">
+            <i class="fas fa-heart"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Set your engagement date here (YYYY-MM-DDTHH:MM:SS)
+        const engagementDate = new Date('2025-12-20T18:00:00').getTime();
+
+        // Update the date display
+        const eventDateElement = document.getElementById('eventDate');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        eventDateElement.textContent = new Date(engagementDate).toLocaleDateString('en-US', options);
+
+        // Countdown Timer Function
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = engagementDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Create Floating Hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartSymbols = ['❤', '💕', '💖', '💗', '💓'];
+
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        // Remove Loader when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+            createHearts();
+        });
+
+        // Smooth scroll animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animation
+        document.querySelectorAll('.countdown-item, .message-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
